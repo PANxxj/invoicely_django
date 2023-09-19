@@ -39,7 +39,7 @@ class Invoice(models.Model):
         return f'{self.invoices} {self.name}'
     
     class Meta:
-        odering=('-created_at',)
+        ordering=('-created_at',)
     
 
 class Item(models.Model):
@@ -52,4 +52,4 @@ class Item(models.Model):
     discount=models.IntegerField(default=0)
 
     def __str__(self) -> str:
-        return f'{self.title    }'
+        return f'{self.title }'
