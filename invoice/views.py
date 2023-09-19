@@ -13,8 +13,10 @@ class InvoiceView(ModelViewSet):
     
     def perform_create(self, serializer):
         team=self.request.user.team.first()
-
-        serializer.save(created_by=self.request.user,team=team)
+        invoice_number=team.first_invoice_number
+        team.first_invoice_number=invoice_number+1
+        team.save()
+        serializer.save(created_by=self.request.user,team=team,invoices=invoice_number,modified_by=self.request.user,bank_account=team.bank_account)
 
     def perform_update(self, serializer):
         obj=self.get_object()

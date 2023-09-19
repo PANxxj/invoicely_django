@@ -34,6 +34,7 @@ class Invoice(models.Model):
     modified_by=models.ForeignKey(User,related_name='updated_invoice',on_delete=models.CASCADE)
     created_at=models.DateTimeField(auto_now_add=True)
     modified_at=models.DateTimeField(auto_now=True)
+    bank_account=models.CharField(max_length=255,blank=True,null=True)
 
     def __str__(self) -> str:
         return f'{self.invoices} {self.name}'
