@@ -70,3 +70,5 @@ class InvoiceSerializer(serializers.ModelSerializer):
             Item.objects.create(invoice=invoice, **item)
         
         return invoice
+    
+    
