@@ -20,7 +20,7 @@ class ItemSerializer(serializers.ModelSerializer):
 
 class InvoiceSerializer(serializers.ModelSerializer):   
     items = ItemSerializer(many=True)
-    bankaccount = serializers.CharField(required=False)
+    bank_account = serializers.CharField(required=False)
 
     class Meta:
         model = Invoice
@@ -55,8 +55,9 @@ class InvoiceSerializer(serializers.ModelSerializer):
             "vat_amount",
             "net_amount",
             "discount_amount",
-            "items"
+            "items",
             "bank_account",
+            # 'bank_account'
             # "get_due_date_formatted",
             # "is_credit_for",
             # "is_credited",
@@ -70,5 +71,4 @@ class InvoiceSerializer(serializers.ModelSerializer):
             Item.objects.create(invoice=invoice, **item)
         
         return invoice
-    
     
