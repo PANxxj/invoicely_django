@@ -8,5 +8,6 @@ router.register('items',ItemView,basename='items')
 
 urlpatterns=[
     path('',include(router.urls)),
-    path('invoices/<int:invoice_id>/generate_pdf/',generate_pdf,name='generate_pdf')
+    path('invoices/<int:invoice_id>/generate_pdf/',generate_pdf,name='generate_pdf'),
+    path('invoices/<int:invoice_id>/send_remainder/',send_remainder,name='send_remainder')
 ]
