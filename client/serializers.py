@@ -1,7 +1,25 @@
 from rest_framework import serializers
 from .models import *
+from invoice.models import Invoice
+
+class clinetInvoiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Invoice
+        fields=(
+            "id",
+            "invoices", 
+            "invoice_type",
+            "is_send",
+            "is_paid",
+            "gross_amount",
+            "vat_amount",
+            "net_amount",
+            "get_due_date_formatted",
+            "is_credited",
+        )
 
 class ClientSerializer(serializers.ModelSerializer):
+    invoices=clinetInvoiceSerializer(many=True)
     class Meta:
         model=Client
         # read_only=('created_by',)
@@ -24,5 +42,5 @@ class ClientSerializer(serializers.ModelSerializer):
             "country",
             "contact_person",
             "contact_refrence",
-            # "invoices",
+            "invoices",
         )
