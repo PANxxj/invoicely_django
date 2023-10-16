@@ -2,7 +2,7 @@ from io import BytesIO
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
 from django.template.loader import get_template
-import pdfkit
+# import pdfkit
 from .serializers  import *
 from .models import *
 from rest_framework.viewsets import ModelViewSet
@@ -13,7 +13,7 @@ from rest_framework.response import Response
 from team.models import Team
 from .utils import render_to_pdf
 from django.core.mail import EmailMultiAlternatives
-from xhtml2pdf import pisa
+# from xhtml2pdf import pisa
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
@@ -93,22 +93,22 @@ def send_remainder(request, invoice_id):
     # msg.send()
     #----------------------------------
 
-    template = get_template('pdf.html')
-    html  = template.render({'invoice': invoice, 'team': team})
-    result = BytesIO()
-    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
-    pdf = result.getvalue()
-    filename = f'invoice_{ invoice.invoices}.pdf'
+    # template = get_template('pdf.html')
+    # html  = template.render({'invoice': invoice, 'team': team})
+    # result = BytesIO()
+    # pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    # pdf = result.getvalue()
+    # filename = f'invoice_{ invoice.invoices}.pdf'
 
-    mail_subject = 'Unpaid Invoice'
-    html_message = render_to_string('pdf.html',{'invoice': invoice, 'team': team})
-    message = strip_tags(html_message)
-    from_email=team.email
-    recipient_list = [invoice.client.email]
-    email = EmailMultiAlternatives(mail_subject,message,from_email,recipient_list)
-    email.attach_alternative(html_message,"text/html")
-    email.attach(filename,pdf,'application/pdf')
-    email.send(fail_silently=True)
+    # mail_subject = 'Unpaid Invoice'
+    # html_message = render_to_string('pdf.html',{'invoice': invoice, 'team': team})
+    # message = strip_tags(html_message)
+    # from_email=team.email
+    # recipient_list = [invoice.client.email]
+    # email = EmailMultiAlternatives(mail_subject,message,from_email,recipient_list)
+    # email.attach_alternative(html_message,"text/html")
+    # email.attach(filename,pdf,'application/pdf')
+    # email.send(fail_silently=True)
 
     return Response()
 
