@@ -11,7 +11,7 @@ from rest_framework import status,authentication,permissions
 from rest_framework.decorators import api_view,authentication_classes,permission_classes
 from rest_framework.response import Response
 from team.models import Team
-from .utils import render_to_pdf
+# from .utils import render_to_pdf
 from django.core.mail import EmailMultiAlternatives
 # from xhtml2pdf import pisa
 from django.template.loader import render_to_string
@@ -49,22 +49,22 @@ class ItemView(ModelViewSet):
 @authentication_classes([authentication.TokenAuthentication])
 @permission_classes([permissions.IsAuthenticated])
 def generate_pdf(request, invoice_id):
-    invoice = get_object_or_404(Invoice, pk=invoice_id, created_by=request.user)
-    team = Team.objects.filter(created_by=request.user).first()
+    # invoice = get_object_or_404(Invoice, pk=invoice_id, created_by=request.user)
+    # team = Team.objects.filter(created_by=request.user).first()
 
-    template_name = 'pdf.html'
+    # template_name = 'pdf.html'
 
-    if invoice.is_credit_for:
-        template_name = 'pdf_creditnote.html'
+    # if invoice.is_credit_for:
+    #     template_name = 'pdf_creditnote.html'
 
-    template = get_template(template_name)
-    html = template.render({'invoice': invoice, 'team': team})
-    # pdf = pdfkit.from_string(html, False, options={})
-    pdf = render_to_pdf('pdf.html', {'invoice': invoice, 'team': team})
-    response = HttpResponse(pdf, content_type='application/pdf')
+    # template = get_template(template_name)
+    # html = template.render({'invoice': invoice, 'team': team})
+    # # pdf = pdfkit.from_string(html, False, options={})
+    # pdf = render_to_pdf('pdf.html', {'invoice': invoice, 'team': team})
+    # response = HttpResponse(pdf, content_type='application/pdf')
     # response['Content-Disposition'] = 'attachment; filename="invoice.pdf"'
 
-    return response
+    return Response()
 
 @api_view(['GET'])
 @authentication_classes([authentication.TokenAuthentication])
