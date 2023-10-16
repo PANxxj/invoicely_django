@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS=[
+    'https://invoicely-front.onrender.com',
     'http://localhost:8080',
     'http://127.0.0.1:8080',
 
